@@ -1,6 +1,6 @@
-#! /usr/bin/env python
+#!/Users/Rafeh/anaconda/envs/python2/bin/python2.7
 ############################################################################
-# Purpose : A very small,basic and my first game
+# Purpose : A very small, basic and my first game
 # Usages : Learning purpose
 # Start date : 12/04/2011
 # End date : 2/05/2011
@@ -18,15 +18,16 @@ from sys import exit
 from random import randint
 
 
-counter=0
+pygame.init()
+COUNTER=0
 
 def main():
  while True:
   b=[]
-#update function used for incrementing the counter
+#update function used for incrementing the COUNTER
   def update():
-   global counter
-   counter=(counter+1)%7
+   global COUNTER
+   COUNTER=(COUNTER+1)%7
 # blast function used for creating the blast through sprites on collision 
   def blast(w,h):
    image=pygame.image.load("explosed-sprite.png").convert_alpha()
@@ -60,13 +61,13 @@ def main():
    for i in pygame.event.get():
     if i.type==QUIT or pressed[K_q]:
      exit()
-   if pressed[K_LEFT] and direction!=right:
+   if pressed[K_h] and direction!=right:
      direction=left
-   elif pressed[K_RIGHT] and direction!=left:
+   elif pressed[K_l] and direction!=left:
       direction=right
-   elif pressed[K_UP] and direction!=down:
+   elif pressed[K_k] and direction!=down:
       direction=up
-   elif pressed[K_DOWN] and direction!=up:
+   elif pressed[K_j] and direction!=up:
       direction=down
    if direction==right:
     snakexy[0]=snakexy[0]+step
@@ -103,9 +104,11 @@ def main():
     snakelist.pop()
 #display on the screen
    screen.fill((0,0,0))
-   scr=pygame.font.SysFont("comicsansms",20)
+   scr=pygame.font.SysFont("Arial",20)
    text4=scr.render("Score : %d"%score,True,(0,255,0))
    screen.blit(text4,(500,10))
+   s1=pygame.font.SysFont("Arial",30)
+   screen.blit(s1.render("phajanngggg",True,(0,255,0)),(50,250))
    pygame.draw.rect(screen,(255,0,0),Rect(applexy,block),0)
    for i in snakelist:
     pygame.draw.rect(screen,(0,255,0),Rect(i,block))
@@ -116,16 +119,16 @@ def main():
   if dead==1:
    blast(20,20)
    for i in xrange(7):
-    screen.blit(b[counter],(snakexy[0],snakexy[1]))
+    screen.blit(b[COUNTER],(snakexy[0],snakexy[1]))
     update()
     pygame.display.update()
     clock.tick(10)
 #game over
    screen.fill((0,0,0))
-   over=pygame.font.SysFont("comicsansms",40)
+   over=pygame.font.SysFont("Arial",40)
    text5=over.render("GAME OVER",True,(0,255,0))
-   s1=pygame.font.SysFont("comicsansms",30)
-   s2=pygame.font.SysFont("comicsansms",30)
+   s1=pygame.font.SysFont("Arial",30)
+   s2=pygame.font.SysFont("Arial",30)
    screen.blit(text5,(50,50))
    screen.blit(text4,(200,200))
    screen.blit(s1.render("Press s To Play Again",True,(0,255,0)),(50,250))

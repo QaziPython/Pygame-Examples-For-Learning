@@ -16,6 +16,7 @@ import pygame
 from  pygame.locals import *
 from sys import exit
 from random import randint
+pygame.init()
 
 counter=0
 def main():
